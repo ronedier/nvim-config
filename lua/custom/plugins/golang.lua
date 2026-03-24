@@ -4,9 +4,7 @@ return {
     ft = 'go',
     -- branch = "develop"
     -- (optional) updates the plugin's dependencies on each update
-    build = function()
-      vim.cmd.GoInstallDeps()
-    end,
+    build = function() vim.cmd.GoInstallDeps() end,
     ---@module "gopher"
     ---@type gopher.Config
     opts = {},
@@ -44,7 +42,7 @@ return {
           transform = 'snakecase',
 
           -- default tags to add to struct fields
-          default_tag = 'json',
+          default_tag = 'yaml',
 
           -- default tag option added struct fields, set to nil to disable
           -- e.g: `option = "json=omitempty,xml=omitempty`
