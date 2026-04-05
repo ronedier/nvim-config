@@ -620,7 +620,14 @@ require('lazy').setup({
         bashls = {},
         jsonls = {},
         yamlls = {},
-        ruff = {},
+        ruff = {
+          init_options = {
+            settings = {
+              showSyntaxErrors = false,
+            },
+          },
+        },
+        ty = {},
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -678,6 +685,7 @@ require('lazy').setup({
         'bashls',
         'lua_ls',
         'ruff',
+        'ty',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
