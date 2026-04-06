@@ -402,7 +402,7 @@ require('lazy').setup({
         pickers = {
           find_files = {
             hidden = true,
-            file_ignore_patterns = { '%.git/' },
+            file_ignore_patterns = { '%.git/', '%.venv/', '__pycache__/' },
             no_ignore = true,
             no_ignore_parent = true,
           },
