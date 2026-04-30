@@ -628,6 +628,7 @@ require('lazy').setup({
           },
         },
         ty = {},
+        jinja_lsp = {},
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -686,6 +687,7 @@ require('lazy').setup({
         'lua_ls',
         'ruff',
         'ty',
+        'jinja_lsp',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
