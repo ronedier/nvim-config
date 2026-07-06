@@ -55,5 +55,21 @@ return {
         if vim.bo.modifiable then lint.try_lint() end
       end,
     })
+
+    -- Hide lint (and LSP) diagnostics while writing Markdown so they
+    -- don't distract from prose. They reappear as soon as you leave
+    -- insert mode (the InsertLeave autocmd above already re-lints).
+    -- See `:help vim.diagnostic.hide()` / `:help vim.diagnostic.show()`.
+    local md_diag_augroup = vim.api.nvim_create_augroup('lint-markdown-hide-insert', { clear = true })
+    vim.api.nvim_create_autocmd('InsertEnter', {
+      group = md_diag_augroup,
+      pattern = { '*.md', '*.markdown' },
+      callback = function(args) vim.diagnostic.hide(nil, args.buf) end,
+    })
+    vim.api.nvim_create_autocmd('InsertLeave', {
+      group = md_diag_augroup,
+      pattern = { '*.md', '*.markdown' },
+      callback = function(args) vim.diagnostic.show(nil, args.buf) end,
+    })
   end,
 }
