@@ -220,6 +220,15 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<C-e>', ':Explore<CR>', { desc = 'Open file manager' })
 
+-- Make change operations delete without yanking into the unnamed register.
+-- Route the change keys through the black-hole register `"_` so that
+-- `c`, `C`, `s`, `S` (and any motion/text-object they take, like `ciw`,
+-- `cw`, `cc`) don't clobber your yank history.
+-- See `:help registers` and `:help _` (black hole register).
+for _, lhs in ipairs { 'c', 'C', 's', 'S', 'x' } do
+  vim.keymap.set({ 'n', 'x' }, lhs, '"_' .. lhs, { remap = false })
+end
+
 -- Support for russian keyboard layout in normal mode <https://neovim.io/doc/user/russian.html>
 vim.o.langmap =
   'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
@@ -629,6 +638,7 @@ require('lazy').setup({
         },
         ty = {},
         jinja_lsp = {},
+        harper_ls = {},
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -688,6 +698,7 @@ require('lazy').setup({
         'ruff',
         'ty',
         'jinja_lsp',
+        'harper-ls',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
