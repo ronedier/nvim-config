@@ -638,7 +638,17 @@ require('lazy').setup({
         },
         ty = {},
         jinja_lsp = {},
-        harper_ls = {},
+        harper_ls = {
+          settings = {
+            ['harper-ls'] = {
+              userDictPath = vim.fn.expand '~/.config/harper/dictionary.txt',
+              linters = {
+                SentenceCapitalization = false,
+                SpellCheck = true,
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
