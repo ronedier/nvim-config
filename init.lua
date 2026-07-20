@@ -245,6 +245,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
+-- Associate Helm template files with the 'helm' filetype
+vim.filetype.add({
+  pattern = {
+    ['.*/templates/.*%.ya?ml'] = 'helm',
+    ['.*/templates/.*%.tpl'] = 'helm',
+    ['.*/values.*%.ya?ml'] = 'helm',
+  },
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -629,6 +638,18 @@ require('lazy').setup({
         bashls = {},
         jsonls = {},
         yamlls = {},
+        helm_ls = {
+          cmd = { 'helm_ls', 'serve' },
+          filetypes = { 'helm' },
+          settings = {
+            ['helm-ls'] = {
+              yamlls = {
+                enabled = true,
+                path = 'yaml-language-server',
+              },
+            },
+          },
+        },
         ruff = {
           init_options = {
             settings = {
@@ -700,15 +721,16 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
         'gopls',
-        'yamlls',
         'jsonls',
         'solargraph',
         'bashls',
+        'yamlls',
         'lua_ls',
         'ruff',
         'ty',
         'jinja_lsp',
         'harper-ls',
+        'helm_ls',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -871,12 +893,12 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('modus-themes').setup({
+      require('modus-themes').setup {
         style = 'auto', -- 'auto' switches between modus_operandi (light) and modus_vivendi (dark) based on vim.o.background
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
-      })
+      }
 
       -- Load the colorscheme here.
       vim.cmd.colorscheme 'modus'
