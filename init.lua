@@ -246,13 +246,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Associate Helm template files with the 'helm' filetype
-vim.filetype.add({
+vim.filetype.add {
   pattern = {
     ['.*/templates/.*%.ya?ml'] = 'helm',
     ['.*/templates/.*%.tpl'] = 'helm',
     ['.*/values.*%.ya?ml'] = 'helm',
   },
-})
+}
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -659,17 +659,6 @@ require('lazy').setup({
         },
         ty = {},
         jinja_lsp = {},
-        harper_ls = {
-          settings = {
-            ['harper-ls'] = {
-              userDictPath = vim.fn.expand '~/.config/harper/dictionary.txt',
-              linters = {
-                SentenceCapitalization = false,
-                SpellCheck = true,
-              },
-            },
-          },
-        },
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -729,7 +718,6 @@ require('lazy').setup({
         'ruff',
         'ty',
         'jinja_lsp',
-        'harper-ls',
         'helm_ls',
       })
 
@@ -888,23 +876,6 @@ require('lazy').setup({
     },
   },
 
-  { -- Highly accessible colorscheme conforming to WCAG AAA
-    'miikanissi/modus-themes.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('modus-themes').setup {
-        style = 'auto', -- 'auto' switches between modus_operandi (light) and modus_vivendi (dark) based on vim.o.background
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
-      vim.cmd.colorscheme 'modus'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
@@ -1017,7 +988,6 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
