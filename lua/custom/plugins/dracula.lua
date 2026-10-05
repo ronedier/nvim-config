@@ -1,10 +1,2 @@
-return {
-  {
-    'dracula/vim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'dracula'
-    end,
-  },
-}
+vim.pack.add { 'https://github.com/dracula/vim' }
+vim.cmd.colorscheme 'dracula'

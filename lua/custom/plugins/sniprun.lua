@@ -1,15 +1,6 @@
-return {
-  'michaelb/sniprun',
-  branch = 'master',
+vim.pack.add { 'https://github.com/michaelb/sniprun' }
 
-  build = 'sh install.sh',
-
-  config = function()
-    require('sniprun').setup {
-      -- your options
-    }
-    vim.api.nvim_set_keymap('v', '<leader>rr', '<Plug>SnipRun', { silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>rr', '<Plug>SnipRun', { silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>rf', '<Plug>SnipRunOperator', { silent = true })
-  end,
-}
+require('sniprun').setup {}
+vim.keymap.set('v', '<leader>rr', '<Plug>SnipRun', { silent = true })
+vim.keymap.set('n', '<leader>rr', '<Plug>SnipRun', { silent = true })
+vim.keymap.set('n', '<leader>rf', '<Plug>SnipRunOperator', { silent = true })
