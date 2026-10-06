@@ -5,9 +5,6 @@ vim.g.llama_config = {
   model_fim = 'ggml-org/Qwen2.5-Coder-3B-Q8_0-GGUF',
   api_key = '',
   show_info = 0,
-  -- The plugin otherwise registers FIM autocmds for every buffer, including
-  -- Telescope prompts. We install a filtered autocmd below instead.
-  auto_fim = false,
   keymap_fim_trigger = '',
 }
 
